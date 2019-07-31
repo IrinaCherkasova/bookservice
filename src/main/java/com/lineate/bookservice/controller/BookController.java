@@ -2,6 +2,7 @@ package com.lineate.bookservice.controller;
 
 import com.lineate.bookservice.model.Book;
 import com.lineate.bookservice.service.BookService;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -34,5 +35,10 @@ public class BookController {
     @GetMapping(value = "/bookNames", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<String> getAllBookNames() {
         return bookService.findAllBookNames();
+    }
+
+    @PostMapping(value = "/addBooks", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<Book> saveBooks(@RequestBody List<Book> books) {
+        return bookService.save(books);
     }
 }
